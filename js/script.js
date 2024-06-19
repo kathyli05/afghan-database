@@ -71,4 +71,27 @@ $(document).ready(function () {
 
   // Initialize tooltips (optional)
   $('[data-toggle="tooltip"]').tooltip();
+
+  document.getElementById('researchForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const title = document.getElementById('title').value;
+    const abstract = document.getElementById('abstract').value;
+    const authors = document.getElementById('authors').value;
+    const publicationDate = document.getElementById('publicationDate').value;
+    const keywords = document.getElementById('keywords').value;
+    const fileUpload = document.getElementById('fileUpload').files[0];
+    const otherInfo = document.getElementById('otherInfo').value;
+    const contactInfo = document.getElementById('contactInfo').value;
+
+    if (!title || !abstract || !authors || !publicationDate || !keywords || !fileUpload || !contactInfo) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    alert('Research submitted successfully!');
+    
+    // Here, you can add code to handle the form submission, e.g., sending data to your server.
+  });
+
 });
