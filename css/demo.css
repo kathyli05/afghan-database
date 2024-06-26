@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
 * {
   margin: 0;
   padding: 0;
 }
+
 *,
 *::before,
 *::after {
@@ -22,17 +24,18 @@ body {
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 300;
-  font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 15px;
   background: #eee;
 }
+
 .cd__intro {
   padding: 60px 30px;
   margin-bottom: 15px;
   flex-direction: column;
 }
+
 .cd__intro,
 .cd__credit {
   display: flex;
@@ -49,6 +52,7 @@ body {
   font-size: 18pt;
   padding-bottom: 15px;
 }
+
 .cd__intro p {
   font-size: 14px;
 }
@@ -67,20 +71,24 @@ body {
   display: inline-block;
   margin-left: 5px;
 }
+
 .cd__action a.cd__btn:hover {
   background: #666;
   color: #fff;
   transition: 0.3s;
   -webkit-transition: 0.3s;
 }
+
 .cd__action .cd__btn:before {
   font-family: FontAwesome;
   font-weight: normal;
   margin-right: 10px;
 }
+
 .down:before {
   content: "\f019";
 }
+
 .back:before {
   content: "\f112";
 }
@@ -90,18 +98,22 @@ body {
   font-size: 9pt;
   margin-top: 40px;
 }
+
 .cd__credit span:before {
   font-family: FontAwesome;
   color: #e41b17;
   content: "\f004";
 }
+
 .cd__credit a {
   color: #333;
   text-decoration: none;
 }
+
 .cd__credit a:hover {
   color: #1dbf73;
 }
+
 .cd__credit a:hover:after {
   font-family: FontAwesome;
   content: "\f08e";
@@ -109,6 +121,7 @@ body {
   position: absolute;
   margin: 3px;
 }
+
 .cd__main {
   background: #fff;
   padding: 20px;
@@ -116,10 +129,12 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .cd__main {
   display: flex;
   width: 100%;
 }
+
 
 @media only screen and (min-width: 1360px) {
   .cd__main {
@@ -127,5 +142,84 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding: 24px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr,
+  tfoot tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50% !important;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  .table td:nth-child(1) {
+    background: #ccc;
+    height: 100%;
+    top: 0;
+    left: 0;
+    font-weight: bold;
+  }
+
+  /*
+  Label the data
+  */
+  td:nth-of-type(1):before {
+    content: "Name";
+  }
+
+  td:nth-of-type(2):before {
+    content: "Position";
+  }
+
+  td:nth-of-type(3):before {
+    content: "Office";
+  }
+
+  td:nth-of-type(4):before {
+    content: "Age";
+  }
+
+  td:nth-of-type(5):before {
+    content: "Start date";
+  }
+
+  td:nth-of-type(6):before {
+    content: "Salary";
+  }
+
+  .dataTables_length {
+    display: none;
   }
 }
