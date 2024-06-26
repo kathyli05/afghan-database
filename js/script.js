@@ -1,31 +1,9 @@
-// $(document).ready(function () {
-//   $("#example").DataTable({
-//     //   //disable sorting on last column
-//     //   "columnDefs": [
-//     //     { "orderable": false, "targets": 5 }
-//     //   ],
-
-//     language: {
-//       //customize pagination prev and next buttons: use arrows instead of words
-//       paginate: {
-//         previous: '<span class="fa fa-chevron-left"></span>',
-//         next: '<span class="fa fa-chevron-right"></span>',
-//       },
-//       //customize number of elements to be displayed
-//       lengthMenu:
-//         'Display <select class="form-control input-sm">' +
-//         '<option value="10">10</option>' +
-//         '<option value="20">20</option>' +
-//         '<option value="30">30</option>' +
-//         '<option value="40">40</option>' +
-//         '<option value="50">50</option>' +
-//         '<option value="-1">All</option>' +
-//         "</select> results",
-//     },
-//   });
-// });
-
 $(document).ready(function () {
+  // Initialize Select2
+  $('#country-filter').select2();
+  $('#type-filter').select2();
+  $('#topic-filter').select2();
+
   // Initialize DataTable
   var table = $("#example").DataTable({
     lengthMenu: [10, 25, 50, 75, 100],
@@ -47,12 +25,7 @@ $(document).ready(function () {
     },
   });
 
-  // Apply custom filtering for date range
-  $("#date-from, #date-to").on("change", function () {
-    table.draw();
-  });
-
-  // Custom filtering function which will search data in column 1 between two dates
+  // Custom filtering function for date range
   $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
     var minDate = $("#date-from").val();
     var maxDate = $("#date-to").val();
@@ -69,10 +42,35 @@ $(document).ready(function () {
     return false;
   });
 
+  // Custom filtering function for multi-select dropdowns
+  $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+    var selectedCountries = $('#country-filter').val();
+    var selectedTypes = $('#type-filter').val();
+    var selectedTopics = $('#topic-filter').val();
+    var dataCountry = data[2]; // Country column is the third column (index 2)
+    var dataType = data[3]; // Type column is the fourth column (index 3)
+    var dataTopic = data[4]; // Topic column is the fifth column (index 4)
+
+    // Check if data matches selected filters
+    var matchCountry = selectedCountries.length === 0 || selectedCountries.includes(dataCountry);
+    var matchType = selectedTypes.length === 0 || selectedTypes.includes(dataType);
+    var matchTopic = selectedTopics.length === 0 || selectedTopics.includes(dataTopic);
+
+    if (matchCountry && matchType && matchTopic) {
+      return true;
+    }
+    return false;
+  });
+
+  // Event listener for the Apply Filters button
+  $('#apply-filters').on('click', function () {
+    table.draw();
+  });
+
   // Initialize tooltips (optional)
   $('[data-toggle="tooltip"]').tooltip();
 
-  document.getElementById('researchForm').addEventListener('submit', function(event) {
+  document.getElementById('researchForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const title = document.getElementById('title').value;
@@ -85,12 +83,12 @@ $(document).ready(function () {
     const contactInfo = document.getElementById('contactInfo').value;
 
     if (!title || !abstract || !authors || !publicationDate || !keywords || !fileUpload || !contactInfo) {
-        alert('Please fill in all required fields.');
-        return;
+      alert('Please fill in all required fields.');
+      return;
     }
 
     alert('Research submitted successfully!');
-    
+
     // Here, you can add code to handle the form submission, e.g., sending data to your server.
   });
 
