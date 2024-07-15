@@ -9,6 +9,7 @@ $(document).ready(function () {
     lengthMenu: [10, 25, 50, 75, 100],
     responsive: true,
     language: {
+      search: "Search by keyword:", // Change the placeholder text
       paginate: {
         previous: '<span class="fa fa-chevron-left"></span>',
         next: '<span class="fa fa-chevron-right"></span>',
@@ -29,7 +30,7 @@ $(document).ready(function () {
   $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
     var minDate = $("#date-from").val();
     var maxDate = $("#date-to").val();
-    var date = data[1]; // Date column is the second column (index 1)
+    var date = data[3]; // Date column is now the fourth column (index 3)
 
     if (
       (minDate === "" && maxDate === "") ||
@@ -47,14 +48,14 @@ $(document).ready(function () {
     var selectedCountries = $('#country-filter').val();
     var selectedTypes = $('#type-filter').val();
     var selectedTopics = $('#topic-filter').val();
-    var dataCountry = data[2]; // Country column is the third column (index 2)
-    var dataType = data[3]; // Type column is the fourth column (index 3)
-    var dataTopic = data[4]; // Topic column is the fifth column (index 4)
+    var dataCountry = data[5].split(', '); // Country column is now the sixth column (index 5)
+    var dataType = data[4].split(', '); // Type column is now the fifth column (index 4)
+    var dataTopic = data[1].split(', '); // Topic column is now the second column (index 1)
 
     // Check if data matches selected filters
-    var matchCountry = selectedCountries.length === 0 || selectedCountries.includes(dataCountry);
-    var matchType = selectedTypes.length === 0 || selectedTypes.includes(dataType);
-    var matchTopic = selectedTopics.length === 0 || selectedTopics.includes(dataTopic);
+    var matchCountry = selectedCountries.length === 0 || selectedCountries.some(tag => dataCountry.includes(tag));
+    var matchType = selectedTypes.length === 0 || selectedTypes.some(tag => dataType.includes(tag));
+    var matchTopic = selectedTopics.length === 0 || selectedTopics.some(tag => dataTopic.includes(tag));
 
     if (matchCountry && matchType && matchTopic) {
       return true;
@@ -69,27 +70,4 @@ $(document).ready(function () {
 
   // Initialize tooltips (optional)
   $('[data-toggle="tooltip"]').tooltip();
-
-  document.getElementById('researchForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const title = document.getElementById('title').value;
-    const abstract = document.getElementById('abstract').value;
-    const authors = document.getElementById('authors').value;
-    const publicationDate = document.getElementById('publicationDate').value;
-    const keywords = document.getElementById('keywords').value;
-    const fileUpload = document.getElementById('fileUpload').files[0];
-    const otherInfo = document.getElementById('otherInfo').value;
-    const contactInfo = document.getElementById('contactInfo').value;
-
-    if (!title || !abstract || !authors || !publicationDate || !keywords || !fileUpload || !contactInfo) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-
-    alert('Research submitted successfully!');
-
-    // Here, you can add code to handle the form submission, e.g., sending data to your server.
-  });
-
 });
