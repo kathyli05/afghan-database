@@ -10,7 +10,7 @@ const awsSecretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 const awsRegion = process.env.AWS_REGION;
 const dynamoDBTableName = process.env.DYNAMODB_TABLE_NAME;
 
-const fields = 'source_name, link, date_of_pub, country_of_publication, associated_orgs, type_of_pub, topics, summary';
+const fields = 'source_name, author, link, date_of_pub, country_of_publication, associated_orgs, type_of_pub, topics, summary';
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient({
   region: awsRegion,
@@ -22,7 +22,7 @@ async function fetchDataFromGoogleSheets() {
   try {
     const sheets = google.sheets({ version: 'v4', auth: googleApiKey });
     const spreadsheetId = '18_fX8MBotdalCj2MQ4Qb7gcGUujaMGXfSCzPeIR8lIA';
-    const range = 'Re-organized!A2:H';
+    const range = 'Re-organized!A2:I';
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
@@ -38,14 +38,16 @@ async function fetchDataFromGoogleSheets() {
     } else {
       const data = rows.map(row => ({
         source_name: row[0],
-        link: row[1],
-        date_of_pub: row[2],
-        country_of_pub: row[3],
-        associated_orgs: row[4].split(',').map(org => org.trim()), 
-        type_of_pub: row[5].split(',').map(pub => pub.trim()), 
-        topics: row[6].split(',').map(topic => topic.trim()), 
-        summary: row[7],
+        author: row[1].split(',').map(author => author.trim()), 
+        link: row[2],
+        date_of_pub: row[3],
+        country_of_publication: row[4],
+        associated_orgs: row[5].split(',').map(org => org.trim()), 
+        type_of_pub: row[6].split(',').map(pub => pub.trim()), 
+        topics: row[7].split(',').map(topic => topic.trim()), 
+        summary: row[8]
       }));
+      console.log('Transformed data:', JSON.stringify(data, null, 2)); 
       return data;
     }
   } catch (error) {
@@ -69,32 +71,44 @@ async function writeToDynamoDB(data) {
       return;
     }
 
-    const batchWriteParams = {
-      RequestItems: {
-        [dynamoDBTableName]: newData.map(item => ({
-          PutRequest: {
-            Item: {
-              source_name: item.source_name,
-              link: item.link,
-              date_of_pub: item.date_of_pub,
-              country_of_pub: item.country_of_publication,
-              associated_orgs: item.associated_orgs,
-              type_of_pub: item.type_of_pub,
-              topics: item.topics,
-              summary: item.summary,
-            }
-          }
-        }))
-      }
-    };
+    const chunks = chunkArray(newData, 25);
 
-    const result = await dynamoDB.batchWrite(batchWriteParams).promise();
-    console.log('Batch write result:', result);
+    for (const chunk of chunks) {
+      const batchWriteParams = {
+        RequestItems: {
+          [dynamoDBTableName]: chunk.map(item => ({
+            PutRequest: {
+              Item: {
+                source_name: item.source_name,
+                author: item.author,
+                link: item.link,
+                date_of_pub: item.date_of_pub,
+                country_of_publication: item.country_of_publication,
+                associated_orgs: item.associated_orgs,
+                type_of_pub: item.type_of_pub,
+                topics: item.topics,
+                summary: item.summary,
+              }
+            }
+          }))
+        }
+      };
+      const result = await dynamoDB.batchWrite(batchWriteParams).promise();
+      console.log('Batch write result:', result);
+    }
 
   } catch (error) {
     console.error('Error writing to DynamoDB:', error);
     throw error;
   }
+}
+
+function chunkArray(array, size) {
+  const chunkedArray = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunkedArray.push(array.slice(i, i + size));
+  }
+  return chunkedArray;
 }
 
 async function fetchExistingItemsFromDynamoDB() {
