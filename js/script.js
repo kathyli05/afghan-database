@@ -3,18 +3,18 @@ $(document).ready(function () {
   const table = $("#example").DataTable();
 
   // Fetch data from the server
-  console.log('Starting fetch request'); 
+  console.log('Starting fetch request');
   fetch('http://localhost:3000/data')
     .then(response => {
       console.log('Received response:', response);
       if (!response.ok) {
-          throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok');
       }
       return response.json();
     })
     .then(data => {
       // Populate the table with data
-      console.log('Data fetched:', data); 
+      console.log('Data fetched:', data);
       const tbody = $('#example tbody');
       tbody.empty(); // Clear any existing rows
       data.forEach(item => {
@@ -66,9 +66,9 @@ $(document).ready(function () {
     const country = $("#country-filter").val().toLowerCase();
     const type = $("#type-filter").val().toLowerCase();
     const topic = $("#topic-filter").val().toLowerCase();
-    const countryData = data[0].toLowerCase(); 
-    const typeData = data[6].toLowerCase(); 
-    const topicData = data[3].toLowerCase(); 
+    const countryData = data[0].toLowerCase();
+    const typeData = data[6].toLowerCase();
+    const topicData = data[3].toLowerCase();
     if (
       (country === "" || countryData.includes(country)) &&
       (type === "" || typeData.includes(type)) &&
