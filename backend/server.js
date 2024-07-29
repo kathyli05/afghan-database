@@ -17,8 +17,10 @@ AWS.config.update({
   region: process.env.AWS_REGION,
 });
 
+const allowedOrigins = process.env.NODE_ENV === 'production' ? 'https://afghan-database-1.onrender.com' : '*';
+
 app.use(cors({
-  origin: '*',
+  origin: allowedOrigins,
   optionsSuccessStatus: 200,
 }));
 
