@@ -18,9 +18,9 @@ AWS.config.update({
 });
 
 app.use(cors({
-  origin: 'http://localhost:3000', 
+  origin: '*',
   optionsSuccessStatus: 200,
-})); 
+}));
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
