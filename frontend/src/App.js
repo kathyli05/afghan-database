@@ -110,7 +110,7 @@ function App() {
               name="searchInput"
               value={searchInput}
               onChange={handleChange}
-              placeholder="Search for content (e.g., topics, types)"
+              placeholder="Search for content (e.g., topic, type, author)"
               className="form-control"
             />
           </div>

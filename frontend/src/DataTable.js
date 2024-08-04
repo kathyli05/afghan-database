@@ -30,7 +30,7 @@ const DataTableComponent = ({ data }) => {
     let [start, end] = filterValues.map(date => date ? parseISO(date) : null);
     console.log('Start Date:', start);
     console.log('End Date:', end);
-    
+
     if (!start && !end) {
       return rows;
     }
@@ -57,7 +57,7 @@ const DataTableComponent = ({ data }) => {
     if (!filterValues) {
       return rows;
     }
-    
+
     return rows.filter(row => {
       const types = row.values[id];
       if (!types) {
@@ -118,7 +118,7 @@ const DataTableComponent = ({ data }) => {
     const values = selectedOptions ? selectedOptions.map(option => option.value) : [];
     console.log(`Filter Type: ${filterType}`);
     console.log(`Selected Options:`, values);
-    
+
     switch (filterType) {
       case 'country_of_publication':
         setSelectedCountries(values);
@@ -132,11 +132,11 @@ const DataTableComponent = ({ data }) => {
       default:
         break;
     }
-    
+
     // Use values directly since the state hasn't updated yet
     setFilter(filterType, values.length > 0 ? values : undefined);
   };
-  
+
 
   const applyDateFilter = () => {
     console.log('Applying Date Filter');
@@ -241,21 +241,6 @@ const DataTableComponent = ({ data }) => {
     <div className="container mt-5">
       <div className="row mb-4">
         <div className="col-md-2">
-          <label htmlFor="pagination">Results Per Page</label>
-          <select
-            id="page-selection"
-            className="form-control"
-            value={pageSize}
-            onChange={e => setPageSize(Number(e.target.value))}
-          >
-            {[10, 20, 30, 40, 50].map(pageSize => (
-              <option key={pageSize} value={pageSize}>
-                {pageSize}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="col-md-2">
           <label htmlFor="date-from">From Date:</label>
           <input
             id="date-from"
@@ -331,6 +316,7 @@ const DataTableComponent = ({ data }) => {
           })}
         </tbody>
       </table>
+
       <div className="pagination mt-3">
         <button className="btn btn-outline-dark mr-2" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {'<<'}
@@ -347,6 +333,22 @@ const DataTableComponent = ({ data }) => {
         <span className="align-middle ml-2">
           Page {pageIndex + 1} of {pageOptions.length}
         </span>
+      </div>
+
+      <div className="col-md-2 mt-3">
+        <label htmlFor="pagination">Results Per Page</label>
+        <select
+          id="page-selection"
+          className="form-control"
+          value={pageSize}
+          onChange={e => setPageSize(Number(e.target.value))}
+        >
+          {[10, 20, 30, 40, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              {pageSize}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
