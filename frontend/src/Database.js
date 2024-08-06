@@ -12,7 +12,7 @@ const Database = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get('/data')
+    axios.get(`${process.env.REACT_APP_API_URL}/data`)
       .then(response => {
         console.log('API Response:', response.data);
         if (response.data && Array.isArray(response.data.Items)) {
