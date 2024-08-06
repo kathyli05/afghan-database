@@ -17,10 +17,12 @@ AWS.config.update({
   region: process.env.AWS_REGION,
 });
 
+const allowedOrigins = process.env.NODE_ENV === 'production' ? 'https://afghan-database-1.onrender.com' : '*';
+
 app.use(cors({
-  origin: 'http://localhost:3000', 
+  origin: allowedOrigins,
   optionsSuccessStatus: 200,
-})); 
+}));
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
