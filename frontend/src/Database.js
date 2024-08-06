@@ -10,7 +10,7 @@ const Database = () => {
   const [error, setError] = useState('');
 
   const filterData = (data) => {
-    const filter_data = data.filter(item => item.source_ame !== 'Test' && item.source_name !== 'Test2');
+    const filter_data = data.filter(item => item.source_name !== 'Test' && item.source_name !== 'Test2');
     return filter_data
   };
 
