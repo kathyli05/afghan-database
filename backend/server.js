@@ -4,7 +4,7 @@ const cors = require('cors');
 require('dotenv').config(); 
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 console.log('AWS_ACCESS_KEY_ID:', process.env.AWS_ACCESS_KEY_ID);
 console.log('AWS_SECRET_ACCESS_KEY:', process.env.AWS_SECRET_ACCESS_KEY);
