@@ -7,17 +7,19 @@ import { FaEnvelope } from 'react-icons/fa';
 
 const Database = () => {
   const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [searchInput, setSearchInput] = useState('');
   const [error, setError] = useState('');
+
+  const filterData = (data) => {
+    const filter_data = data.filter(item => item.source_ame !== 'Test' && item.source_name !== 'Test2');
+    return filter_data
+  };
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/data`)
       .then(response => {
         console.log('API Response:', response.data);
         if (response.data && Array.isArray(response.data.Items)) {
-          setData(response.data.Items);
-          setFilteredData(response.data.Items);
+          setData(filterData(response.data.Items));
           console.log(response.data.Items);
         } else {
           console.error('Unexpected data format:', response.data);
@@ -30,40 +32,6 @@ const Database = () => {
       });
   }, []);
 
-  const handleChange = event => {
-    const value = event.target.value;
-    setSearchInput(value);
-  };
-
-  const handleSearch = () => {
-    console.log(searchInput);
-    console.log(data[0].source_name);
-    globalSearch(searchInput, data);
-  };
-
-  const containsSubstring = (list, input) => {
-    const lowerCaseInput = input.toLowerCase();
-    return list.some(item => item && item.toLowerCase().includes(lowerCaseInput));
-  };
-
-  const globalSearch = (input, data) => {
-    if (input) {
-      const filtered = data.filter(row => {
-        return (
-          row.summary.toLowerCase().includes(input.toLowerCase()) ||
-          row.source_name.toLowerCase().includes(input.toLowerCase()) ||
-          row.country_of_publication.toLowerCase().includes(input.toLowerCase()) ||
-          containsSubstring(row.author, input) ||
-          containsSubstring(row.associated_orgs, input) ||
-          containsSubstring(row.type_of_pub, input) ||
-          containsSubstring(row.topics, input)
-        );
-      });
-      setFilteredData(filtered);
-    } else {
-      setFilteredData(data);
-    }
-  };
 
   return (
     <div>
