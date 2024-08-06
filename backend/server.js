@@ -1,6 +1,7 @@
 const express = require('express');
 const AWS = require('aws-sdk');
 const cors = require('cors');
+const { prototype } = require('aws-sdk/clients/cloudformation');
 require('dotenv').config(); 
 
 const app = express();
@@ -65,5 +66,5 @@ app.get('/data', async (req, res) => {
 });
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on http://0.0.0.0:${PORT}`);
+  console.log(`Server is running on http://0.0.0.0:${port}`);
 });
