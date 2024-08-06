@@ -53,7 +53,7 @@ const Database = () => {
                     {error && <div className="alert alert-danger" role="alert">{error}</div>}
                     <div className="row mb-4">
                         <div className="col-md-12">
-                            <DataTableComponent data={filteredData.length ? filteredData : data} />
+                            <DataTableComponent data={data} />
                         </div>
                     </div>
                 </div>
