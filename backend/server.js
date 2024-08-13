@@ -5,7 +5,7 @@ const { prototype } = require('aws-sdk/clients/cloudformation');
 require('dotenv').config(); 
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 10000;
 
 console.log('AWS_ACCESS_KEY_ID:', process.env.AWS_ACCESS_KEY_ID);
 console.log('AWS_SECRET_ACCESS_KEY:', process.env.AWS_SECRET_ACCESS_KEY);
@@ -66,5 +66,5 @@ app.get('/data', async (req, res) => {
 });
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on http://0.0.0.0:${port}`);
+  console.log(`Server is running on port ${PORT}`);
 });
