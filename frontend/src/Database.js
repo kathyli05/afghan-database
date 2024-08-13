@@ -14,8 +14,10 @@ const Database = () => {
     return filter_data
   };
 
+  const env_url = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/data`)
+    axios.get(`${env_url}/data`)
       .then(response => {
         console.log('API Response:', response.data);
         if (response.data && Array.isArray(response.data.Items)) {
@@ -36,7 +38,7 @@ const Database = () => {
   return (
     <div>
             <header className="header">
-                <a href="#" className="logo">Project Afghanistan</a>
+                <a className="logo">Project Afghanistan</a>
                 <nav className="nav-items">
                     <a href="/homepage">Home</a>
                     <a href="/database">Database</a>
