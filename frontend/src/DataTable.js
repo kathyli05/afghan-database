@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './DataTable.css';
 import { isAfter, isBefore, parseISO, compareAsc } from 'date-fns';
 
+
 const DataTableComponent = ({ data }) => {
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
@@ -243,6 +244,28 @@ const DataTableComponent = ({ data }) => {
       {
         Header: 'Summary',
         accessor: 'summary',
+        Cell: ({ value }) => {
+          // add state for managing expanded summaries
+          const [isExpanded, setIsExpanded] = useState(false);
+
+          // toggle the expanded state
+          const handleToggle = () => setIsExpanded(!isExpanded);
+
+          // make text short if not expanded
+          const summaryText = isExpanded ? value : `${value.slice(0, 100)}...`;
+
+          return (
+            <>
+              {summaryText}
+              {value.length > 100 && (
+                <button onClick={handleToggle} className="btn btn-link">
+                  {isExpanded ? 'Read less' : 'Read more'}
+                </button>
+              )}
+            </>
+          );
+        },
+
         disableSortBy: true // Disable sorting for the summary column
       },
     ],
@@ -386,11 +409,11 @@ const DataTableComponent = ({ data }) => {
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
                   <span>
-                  {column.isSorted
-                ? column.isSortedDesc
-                  ? column.id === 'date_of_pub' ? ' (Descending)' : ' (Z - A)'
-                  : column.id === 'date_of_pub' ? ' (Ascending)' : ' (A - Z)'
-                : ''}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? column.id === 'date_of_pub' ? ' (Descending)' : ' (Z - A)'
+                        : column.id === 'date_of_pub' ? ' (Ascending)' : ' (A - Z)'
+                      : ''}
                   </span>
                 </th>
               ))}

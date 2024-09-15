@@ -16,7 +16,7 @@ function App() {
         console.log("API Response:", response.data);
         if (response.data && Array.isArray(response.data.Items)) {
           setData(response.data.Items);
-          //setFilteredData(response.data.Items);
+          setFilteredData(response.data.Items);
         } else {
           console.error("Unexpected data format:", response.data);
           setError("Unexpected data format received from the server.");
