@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <div>
             <header className="header">
-                <a href="#" className="logo">Project Afghanistan</a>
+                <a href="#" className="logo">Impact Afghanistan</a>
                 <nav className="nav-items">
                     <a href="/homepage">Home</a>
                     <a href="/database">Database</a>
@@ -15,7 +15,7 @@ const Home = () => {
             </header>
             <main>
                 <div className="intro">
-                    <h1>Insert catchy phrase</h1>
+                    <h5>The Afghan Lens: A Trusted Source for Real-Time Research</h5>
                     <p>This project aims to address the lack of visibility into and accurate information coming out of
                         Afghanistan since the Taliban seized power in 2021. Academics, NGOs, and the international community continue to seek ways to provide accurate and
                         up-to-date, verifiable reporting on the situation in Afghanistan. This project brings together current reports in a single-source platform, where scholars and others may search
@@ -43,9 +43,12 @@ const Home = () => {
                 <div className="announcements">
                     <h1>Announcements</h1>
                     <ul>
-                        <li>Announcement 1: We have officially launched! Please submit your research
-                            <a href="/form"> here.</a>
+                        <li>Announcement 1: We have officially launched! Please submit your research&nbsp;
+                             <a href="/form">here.</a>
                         </li>
+                        <li>Announcement 2: Members from our organization will be presenting this project on September 20th at the United Nations Summit of the Future Action Days! Slides will be uploaded soon.
+                        </li>
+
                     </ul>
                 </div>
                 <div className="resources">
@@ -64,11 +67,10 @@ const Home = () => {
                 </div>
             </main>
             <footer className="footer">
-                <div className="copy">&copy; 2024 Project Afghanistan - All Rights Reserved.</div>
+                <div className="copy">&copy; 2024 Impact Afghanistan - All Rights Reserved.</div>
                 <div className="bottom-links">
                     <div className="links">
-                        <span>Contact us: </span>
-                        <a href="mailto:info@projectafghanistan.org"><FaEnvelope /> info@projectafghanistan.org</a>
+                        <a href="mailto:impactcompact.afghanistan@gmail.com"><FaEnvelope /> impactcompact.afghanistan@gmail.com</a>
                     </div>
                 </div>
             </footer>

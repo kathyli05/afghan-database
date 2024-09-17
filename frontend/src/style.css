@@ -12,14 +12,19 @@
 *::after {
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 
 body {
+    margin: 0;
+    padding: 0;
+    height: 100%; 
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-content: flex-start;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
 
     font-family: "Roboto", sans-serif;
     font-style: normal;
@@ -31,24 +36,39 @@ body {
 }
 
 
-.header,
-.footer {
-    height: 60px;
+.header {
+    height: 80px !important;
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #064322;
 }
 
+.footer {
+    height: 70px;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #064322;
+}
+
+
 .header .logo {
-    font-size: 30px;
+    font-size: 100px;
     font-family: 'Roboto';
     color: #fff;
     /* Change to white for better visibility */
     text-decoration: none;
 }
+
+main {
+    flex-grow: 1; /* Takes up available vertical space */
+  }
+  
 
 .nav-items {
     display: flex;
@@ -322,13 +342,23 @@ main {
     margin: 0;
 }
 
+
+.intro h5 {
+    font-family: 'Roboto';
+    font-size: 35px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
 .intro p {
     padding: 2%;
     font-family: 'Roboto';
     font-size: 30px;
     color: #d1d1d1;
     text-align: center;
-    margin: 20px 0;
+    margin: 0px 0;
 }
 
 .intro button {
@@ -339,6 +369,7 @@ main {
     border-radius: 5px;
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 20px; /* Add margin to separate button from text */
     cursor: pointer;
 }
 
@@ -448,12 +479,20 @@ main {
 
 .announcements ul {
     padding: 1%;
+    padding-left: 60px;
+    padding-right: 60px;
     font-family: 'Roboto';
     font-size: 20px;
     color: #d1d1d1;
     text-align: left;
     margin: 20px 0;
+    list-style-position: inside; 
 }
+
+
+.announcements li {
+    list-style-position: inside; /* Ensures bullets are inside the content flow */
+  }  
 
 .announcements a {
     font-family: 'Roboto';
