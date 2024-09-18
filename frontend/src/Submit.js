@@ -6,7 +6,7 @@ const SubmitResearch = () => {
     return (
         <div>
             <header className="header">
-                <a href="#" className="logo">Project Afghanistan</a>
+                <a href="#" className="logo">Impact Afghanistan</a>
                 <nav className="nav-items">
                     <a href="/homepage">Home</a>
                     <a href="/database">Database</a>
@@ -23,11 +23,10 @@ const SubmitResearch = () => {
                 </div>
             </main>
             <footer className="footer">
-                <div className="copy">&copy; 2024 Project Afghanistan - All Rights Reserved.</div>
+                <div className="copy">&copy; 2024 Impact Afghanistan - All Rights Reserved.</div>
                 <div className="bottom-links">
                     <div className="links">
-                        <span>Contact us: </span>
-                        <a href="mailto:info@projectafghanistan.org"><FaEnvelope /> info@projectafghanistan.org</a>
+                        <a href="mailto:impactcompact.afghanistan@gmail.com"><FaEnvelope /> impactcompact.afghanistan@gmail.com</a>
                     </div>
                 </div>
             </footer>
