@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Database.css'; 
+import './Database.css';
 import DataTableComponent from './DataTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEnvelope } from 'react-icons/fa';
@@ -38,7 +38,7 @@ const Database = () => {
   return (
     <div>
             <header className="header">
-                <a className="logo">Project Afghanistan</a>
+                <a href="#" className="logo">Project Afghanistan</a>
                 <nav className="nav-items">
                     <a href="/homepage">Home</a>
                     <a href="/database">Database</a>
@@ -47,8 +47,8 @@ const Database = () => {
             </header>
             <main>
                 <div className="intro">
-                    <p>The database consists of articles on human rights condition in Afghanistan 
-                        post 2021. (to be modified. more description of the features.)
+                    <p>The database consists of articles related to conditions of Afghanistan 
+                        post 2021, such as human rights and health report.
                     </p>
                 </div>
                 <div className="table">
