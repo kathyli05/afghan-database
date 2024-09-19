@@ -37,39 +37,38 @@ const Database = () => {
 
   return (
     <div>
-            <header className="header">
-                <a href="#" className="logo">Project Afghanistan</a>
-                <nav className="nav-items">
-                    <a href="/homepage">Home</a>
-                    <a href="/database">Database</a>
-                    <a href="/form">Submit Research</a>
-                </nav>
-            </header>
-            <main>
-                <div className="intro">
-                    <p>The database consists of articles related to conditions of Afghanistan 
-                        post 2021, such as human rights and health report.
-                    </p>
-                </div>
-                <div className="table">
-                    {error && <div className="alert alert-danger" role="alert">{error}</div>}
-                    <div className="row mb-4">
-                        <div className="col-md-12">
-                            <DataTableComponent data={data} />
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <footer className="footer">
-                <div className="copy">&copy; 2024 Project Afghanistan - All Rights Reserved.</div>
-                <div className="bottom-links">
-                    <div className="links">
-                        <span>Contact us: </span>
-                        <a href="mailto:info@projectafghanistan.org"><FaEnvelope /> info@projectafghanistan.org</a>
-                    </div>
-                </div>
-            </footer>
+      <header className="header">
+        <a href="#" className="logo">Impact Afghanistan</a>
+        <nav className="nav-items">
+          <a href="/homepage">Home</a>
+          <a href="/database">Database</a>
+          <a href="/form">Submit Research</a>
+        </nav>
+      </header>
+      <main>
+        <div className="intro">
+          <h5>About the Database</h5>
+          <p>This database is a comprehensive collection of articles, reports, and publications focusing on human rights, social, political, and economic conditions in Afghanistan since the Taliban's takeover in 2021. Users can filter results by publication date, country of publication, type of publication, and topic, making it easier to locate specific resources. Explore curated research from various academic institutions, governmental organizations, and NGOs, providing insights into the ongoing challenges and developments in Afghanistan.
+          </p>
         </div>
+        <div className="table">
+          {error && <div className="alert alert-danger" role="alert">{error}</div>}
+          <div className="row mb-4">
+            <div className="col-md-12">
+              <DataTableComponent data={data} />
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer className="footer">
+        <div className="copy">&copy; 2024 Impact Afghanistan - All Rights Reserved.</div>
+        <div className="bottom-links">
+          <div className="links">
+            <a href="mailto:impactcompact.afghanistan@gmail.com"><FaEnvelope /> impactcompact.afghanistan@gmail.com</a>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 };
 

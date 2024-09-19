@@ -136,7 +136,9 @@ const DataTableComponent = ({ data }) => {
         topicsSet.add(row.topics);
       }
     });
-    return Array.from(topicsSet).map(topic => ({ value: topic, label: topic }));
+    const all_topics = Array.from(topicsSet).map(topic => ({ value: topic, label: topic }));
+    console.log(all_topics);
+    return all_topics;
   }, [data]);
 
   const uniqueTypes = useMemo(() => {
