@@ -44,13 +44,18 @@ const Home = () => {
                     <h1>Announcements</h1>
                     <ul>
                         <li>Announcement 1: We have officially launched! Please submit your research&nbsp;
-                             <a href="/form">here.</a>
+                            <a href="/form">here.</a>
                         </li>
-                        <li>Announcement 2: Members from our organization will be presenting this project on September 20th at the United Nations Summit of the Future Action Days! Slides will be uploaded soon.
+                        <li>Announcement 2: Members from our organization will be presenting this project on September 20th at the United Nations Summit of the Future Action Days! More information can be found&nbsp;
+                            <a href="https://powerinhervoicereimaginingagen.splashthat.com/">here.</a>
                         </li>
-
                     </ul>
+                    <div className="iframe-container">
+                        <iframe src="https://docs.google.com/presentation/d/1iRFKWUwe3Gji4jOqaJbAJJSzVeoGc3JSoNqowct2cnI/embed?start=false&loop=false&delayms=15000" frameborder="0" width="576" height="358.8" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                        <div className="iframe-caption">September 20th Slides</div>
+                    </div>
                 </div>
+
                 <div className="resources">
                     <img src="https://img1.wsimg.com/isteam/ip/0a898bff-bebb-498c-9f39-4f537ac3dc49/blob-04245ea.png/:/fx-gs/rs=w:984,h:657"
                         alt="Resources" width="500" height="600" />

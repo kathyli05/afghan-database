@@ -10,7 +10,7 @@ const SubmitResearch = () => {
                 <nav className="nav-items">
                     <a href="/homepage">Home</a>
                     <a href="/database">Database</a>
-                    <a href="/form">Submit Research</a>
+                    <a href="/form"><b>Submit Research</b></a>
                 </nav>
             </header>
             <main>
