@@ -309,7 +309,9 @@ const DataTableComponent = ({ data }) => {
   return (
     <div className="container mt-5">
       <div className="row mb-4">
-        <b> Use the filters below to search and filter the research database:
+        <i>Note: Summaries and dates for certain articles are not available yet - we are working on it! </i> <br>
+        </br> <br></br><br></br> <b>
+          Use the filters below to search and filter the research database:
         </b>
       </div>
       <div className="row mb-4">
@@ -401,6 +403,9 @@ const DataTableComponent = ({ data }) => {
               Apply Search
             </button>
           </div>
+        </div>
+        <div><br></br>
+          <b>Click on a header to sort the results!</b>
         </div>
       </div>
       <table {...getTableProps()} className="table table-hover table-striped">

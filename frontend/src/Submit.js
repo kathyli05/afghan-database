@@ -6,11 +6,11 @@ const SubmitResearch = () => {
     return (
         <div>
             <header className="header">
-                <a href="#" className="logo">Impact Afghanistan</a>
+                <a href="/homepage" className="logo">Impact Afghanistan</a>
                 <nav className="nav-items">
                     <a href="/homepage">Home</a>
                     <a href="/database">Database</a>
-                    <a href="/form">Submit Research</a>
+                    <a href="/form"><b>Submit Research</b></a>
                 </nav>
             </header>
             <main>

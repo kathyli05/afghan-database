@@ -6,9 +6,9 @@ const Home = () => {
     return (
         <div>
             <header className="header">
-                <a href="#" className="logo">Impact Afghanistan</a>
+                <a href="/homepage" className="logo">Impact Afghanistan</a>
                 <nav className="nav-items">
-                    <a href="/homepage">Home</a>
+                    <a href="/homepage"><b>Home</b></a>
                     <a href="/database">Database</a>
                     <a href="/form">Submit Research</a>
                 </nav>
@@ -44,13 +44,18 @@ const Home = () => {
                     <h1>Announcements</h1>
                     <ul>
                         <li>Announcement 1: We have officially launched! Please submit your research&nbsp;
-                             <a href="/form">here.</a>
+                            <a href="/form">here.</a>
                         </li>
-                        <li>Announcement 2: Members from our organization will be presenting this project on September 20th at the United Nations Summit of the Future Action Days! Slides will be uploaded soon.
+                        <li>Announcement 2: Members from our organization will be presenting this project on September 20th at the United Nations Summit of the Future Action Days! More information can be found&nbsp;
+                            <a href="https://powerinhervoicereimaginingagen.splashthat.com/">here.</a>
                         </li>
-
                     </ul>
+                    <div className="iframe-container">
+                        <iframe src="https://docs.google.com/presentation/d/1iRFKWUwe3Gji4jOqaJbAJJSzVeoGc3JSoNqowct2cnI/embed?start=false&loop=false&delayms=15000" frameborder="0" width="576" height="358.8" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                        <div className="iframe-caption">September 20th Slides</div>
+                    </div>
                 </div>
+
                 <div className="resources">
                     <img src="https://img1.wsimg.com/isteam/ip/0a898bff-bebb-498c-9f39-4f537ac3dc49/blob-04245ea.png/:/fx-gs/rs=w:984,h:657"
                         alt="Resources" width="500" height="600" />
@@ -60,7 +65,7 @@ const Home = () => {
                             <li><a href="https://impactafghanistan.org/">Impact Afghanistan</a></li>
                             <li><a href="https://dsi.brown.edu/">Brown Data Science Institute</a></li>
                             <li><a href="https://library.brown.edu/create/cds/projects/">Brown Center for Digital Scholarship</a></li>
-                            <li><a href="https://watson.brown.edu/southasia/">Brown Watson Institute's Center for Contemporary South Asia</a></li>
+                            <li><a href="https://watson.brown.edu/southasia/">Watson Institute's Center for Contemporary South Asia</a></li>
                             <li><a href="https://www.un.org/en/summit-of-the-future/">UN Summit of the Future</a></li>
                         </ul>
                     </div>

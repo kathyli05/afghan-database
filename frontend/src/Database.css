@@ -16,7 +16,7 @@ body {
     flex-wrap: wrap;
     align-content: flex-start;
 
-    font-family: "Roboto", sans-serif;
+    font-family: "Source Sans 3", sans-serif;
     font-style: normal;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
@@ -44,7 +44,9 @@ body {
 
 .header .logo {
     font-size: 30px;
-    font-family: 'Roboto';
+    font-family: 'Source Sans 3';
+    font-weight: bold;
+    text-emphasis: 40;
     color: #fff;
     /* Change to white for better visibility */
     text-decoration: none;

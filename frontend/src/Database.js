@@ -38,10 +38,10 @@ const Database = () => {
   return (
     <div>
       <header className="header">
-        <a href="#" className="logo">Impact Afghanistan</a>
+        <a href="/homepage" className="logo">Impact Afghanistan</a>
         <nav className="nav-items">
           <a href="/homepage">Home</a>
-          <a href="/database">Database</a>
+          <a href="/database"><b>Database</b></a>
           <a href="/form">Submit Research</a>
         </nav>
       </header>
