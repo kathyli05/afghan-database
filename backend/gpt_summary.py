@@ -109,8 +109,8 @@ def process_row(row):
     print(f"Finished extracting summary and topics for row {row.name}")
 
 # Specify the range of rows to process
-start_row = 350 #
-end_row = 370  #  End at row 731
+start_row = 690 #
+end_row = 732  #  End at row 731
 
 # Apply the function to the specific range of rows
 initial_df.iloc[start_row:end_row].apply(process_row, axis=1)
