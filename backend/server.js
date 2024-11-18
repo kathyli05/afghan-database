@@ -27,9 +27,8 @@ app.use(cors({
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-const tableName = 'afghanistan-database'; // CHANGE NAME LATER
+const tableName = 'afghanistan-database';
 const fields = 'source_name, author, link, date_of_pub, country_of_publication, associated_orgs, type_of_pub, topics, summary';
-// CHANGE NAME LATER
 
 const getDataFromDynamoDB = async (tableName, fields) => {
   const params = {
