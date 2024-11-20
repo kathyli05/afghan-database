@@ -97,12 +97,13 @@ body {
 
 .mobile-menu {
   position: fixed;
-  top: 0;
   left: 100%;
   width: 100%;
-  height: 100vh;
+  top: 50px; /* Leave space for the hamburger button */
+  height: calc(100vh - 50px); /* Adjust to fit below the button */
+
   background-color: #064322;
-  z-index: 1000;
+  z-index: 1001;
   transition: left 0.3s ease;
 }
 
@@ -120,14 +121,6 @@ body {
 .logo-small {
   color: white;
   font-size: 20px;
-}
-
-.close-menu {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
 }
 
 .mobile-menu-content {
@@ -149,11 +142,6 @@ body {
 
 .mobile-menu-content a.active {
   background-color: #064322;
-}
-
-.hamburger {
-  z-index: 1001;
-  display: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -427,10 +415,11 @@ main {
 }
 
 .hamburger {
-  display: none;
   border: none;
   background: none;
   cursor: pointer;
+  z-index: 1100;
+  display: none;
   padding: 5px;
 }
 

@@ -18,7 +18,6 @@ const Home = () => {
           <a href="/database">Database</a>
           <a href="/form">Submit Research</a>
         </nav>
-
         <button
           className="hamburger"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
