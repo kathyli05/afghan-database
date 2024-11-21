@@ -43,13 +43,15 @@ def fetch_crossref_metadata(doi):
         published_online = data.get('published-online', {}).get('date-parts', [['N/A']])[0]
         return {
             'authors': ", ".join(authors) if authors else 'N/A',
-            'published_online': "-".join(map(str, published_online))
+            'published_online': "-".join(map(str, published_online)),
+            'abstract': abstract
         }
     else:
         print(f"Failed to retrieve CrossRef metadata for DOI {doi}: {response.status_code}")
         return {
             'authors': 'N/A',
-            'published_online': 'N/A'
+            'published_online': 'N/A',
+            'abstract': 'N/A',
         }
 
 def extract_data(entry):
