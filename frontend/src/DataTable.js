@@ -1,10 +1,9 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import { useTable, useFilters, usePagination, useSortBy } from 'react-table';
-import Select from 'react-select';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './DataTable.css';
-import { isAfter, isBefore, parseISO, compareAsc } from 'date-fns';
-
+import React, { useMemo, useState, useEffect } from "react";
+import { useTable, useFilters, usePagination, useSortBy } from "react-table";
+import Select from "react-select";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./DataTable.css";
+import { isAfter, isBefore, parseISO, compareAsc } from "date-fns";
 
 const DataTableComponent = ({ data }) => {
   const [selectedCountries, setSelectedCountries] = useState([]);
@@ -31,25 +30,24 @@ const DataTableComponent = ({ data }) => {
     console.log(`Selected Topics:`, selectedTopics);
   }, [selectedTopics]);
 
-
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === 'Enter') {
-        if (document.activeElement.id === 'search-for') {
+      if (event.key === "Enter") {
+        if (document.activeElement.id === "search-for") {
           handleSearch();
         } else if (
-          document.activeElement.id === 'date-from' ||
-          document.activeElement.id === 'date-to'
+          document.activeElement.id === "date-from" ||
+          document.activeElement.id === "date-to"
         ) {
           applyDateFilter();
         }
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [searchInput, startDate, endDate]);
 
@@ -86,13 +84,15 @@ const DataTableComponent = ({ data }) => {
   };
 
   const dateBetweenFilterFn = (rows, id, filterValues) => {
-    let [start, end] = filterValues.map(date => date ? parseISO(date) : null);
+    let [start, end] = filterValues.map((date) =>
+      date ? parseISO(date) : null
+    );
 
     if (!start && !end) {
       return rows;
     }
 
-    return rows.filter(row => {
+    return rows.filter((row) => {
       const rowDate = parseISO(row.values[id]);
       if (!rowDate) {
         return false;
@@ -113,69 +113,81 @@ const DataTableComponent = ({ data }) => {
       return rows;
     }
 
-    return rows.filter(row => {
+    return rows.filter((row) => {
       const types = row.values[id];
       if (!types) {
         return false;
       }
-      const items = Array.isArray(types) ? types : (typeof types === 'string' ? types.split(',').map(item => item.trim()) : []);
+      const items = Array.isArray(types)
+        ? types
+        : typeof types === "string"
+        ? types.split(",").map((item) => item.trim())
+        : [];
       if (items.length === 1) {
-        return items.every(item => filterValues.includes(item));
+        return items.every((item) => filterValues.includes(item));
       } else {
-        return items.some(item => filterValues.includes(item));
+        return items.some((item) => filterValues.includes(item));
       }
     });
   };
 
   const uniqueTopics = useMemo(() => {
     const topicsSet = new Set();
-    data.forEach(row => {
+    data.forEach((row) => {
       if (Array.isArray(row.topics)) {
-        row.topics.forEach(topic => topicsSet.add(topic));
+        row.topics.forEach((topic) => topicsSet.add(topic));
       } else if (row.topics) {
         topicsSet.add(row.topics);
       }
     });
-    const all_topics = Array.from(topicsSet).map(topic => ({ value: topic, label: topic }));
-    console.log(all_topics);
-    return all_topics;
+    return Array.from(topicsSet).map((topic) => ({
+      value: topic,
+      label: topic,
+    }));
   }, [data]);
 
   const uniqueTypes = useMemo(() => {
     const typeSet = new Set();
-    data.forEach(row => {
+    data.forEach((row) => {
       if (Array.isArray(row.type_of_pub)) {
-        row.type_of_pub.forEach(type => typeSet.add(type));
+        row.type_of_pub.forEach((type) => typeSet.add(type));
       } else if (row.type_of_pub) {
         typeSet.add(row.type_of_pub);
       }
     });
-    return Array.from(typeSet).map(type => ({ value: type, label: type }));
+    return Array.from(typeSet).map((type) => ({ value: type, label: type }));
   }, [data]);
 
   const uniqueCountries = useMemo(() => {
     const countrySet = new Set();
-    data.forEach(row => {
+    data.forEach((row) => {
       if (Array.isArray(row.country_of_publication)) {
-        row.country_of_publication.forEach(country => countrySet.add(country));
+        row.country_of_publication.forEach((country) =>
+          countrySet.add(country)
+        );
       } else if (row.country_of_publication) {
         countrySet.add(row.country_of_publication);
       }
     });
-    return Array.from(countrySet).map(country => ({ value: country, label: country }));
+    return Array.from(countrySet).map((country) => ({
+      value: country,
+      label: country,
+    }));
   }, [data]);
 
   const handleMultiSelectChange = (filterType, selectedOptions) => {
-    const values = selectedOptions ? selectedOptions.map(option => option.value) : [];
+    const values = selectedOptions
+      ? selectedOptions.map((option) => option.value)
+      : [];
 
     switch (filterType) {
-      case 'country_of_publication':
+      case "country_of_publication":
         setSelectedCountries(values);
         break;
-      case 'type_of_pub':
+      case "type_of_pub":
         setSelectedTypes(values);
         break;
-      case 'topics':
+      case "topics":
         setSelectedTopics(values);
         break;
       default:
@@ -186,66 +198,66 @@ const DataTableComponent = ({ data }) => {
   };
 
   const applyDateFilter = () => {
-    setFilter('date_of_pub', [startDate, endDate]);
+    setFilter("date_of_pub", [startDate, endDate]);
   };
 
   const columns = useMemo(
     () => [
       {
-        Header: 'Source Name',
-        accessor: 'source_name',
+        Header: "Source Name",
+        accessor: "source_name",
         Cell: ({ row }) => (
           <a href={row.original.link} target="_blank" rel="noopener noreferrer">
             {row.original.source_name}
           </a>
         ),
-        sortType: 'basic'
+        sortType: "basic",
       },
       {
-        Header: 'Author',
-        accessor: 'author',
-        Cell: ({ value }) => Array.isArray(value) ? value.join(', ') : value,
-        sortType: 'basic'
+        Header: "Author",
+        accessor: "author",
+        Cell: ({ value }) => (Array.isArray(value) ? value.join(", ") : value),
+        sortType: "basic",
       },
       {
-        Header: 'Date of Publication',
-        accessor: 'date_of_pub',
-        filter: 'dateBetween',
+        Header: "Date of Publication",
+        accessor: "date_of_pub",
+        filter: "dateBetween",
         sortType: (rowA, rowB, columnId) => {
           const dateA = parseISO(rowA.values[columnId]);
           const dateB = parseISO(rowB.values[columnId]);
           return compareAsc(dateA, dateB);
-        }
+        },
       },
       {
-        Header: 'Country of Publication',
-        accessor: 'country_of_publication',
-        filter: 'typeIn',
-        sortType: 'basic'
+        Header: "Country of Publication",
+        accessor: "country_of_publication",
+        filter: "typeIn",
+        sortType: "basic",
       },
       {
-        Header: 'Associated Organizations',
-        accessor: 'associated_orgs',
-        Cell: ({ value }) => Array.isArray(value) ? value.join(', ') : value,
-        sortType: 'basic'
+        Header: "Associated Organizations",
+        accessor: "associated_orgs",
+        Cell: ({ value }) => (Array.isArray(value) ? value.join(", ") : value),
+        sortType: "basic",
       },
       {
-        Header: 'Type of Publication',
-        accessor: 'type_of_pub',
-        Cell: ({ value }) => Array.isArray(value) ? value.join(', ') : value,
-        filter: 'typeIn',
-        sortType: 'basic'
+        Header: "Type of Publication",
+        accessor: "type_of_pub",
+        Cell: ({ value }) => (Array.isArray(value) ? value.join(", ") : value),
+        filter: "typeIn",
+        sortType: "basic",
       },
       {
-        Header: 'Topics',
-        accessor: 'topics',
-        Cell: ({ value }) => Array.isArray(value) ? value.join(', ') : value,
-        filter: 'typeIn',
-        sortType: 'basic'
+        Header: "Topics",
+        accessor: "topics",
+        Cell: ({ value }) => (Array.isArray(value) ? value.join(", ") : value),
+        filter: "typeIn",
+        sortType: "basic",
       },
       {
-        Header: 'Summary',
-        accessor: 'summary',
+        Header: "Summary",
+        accessor: "summary",
         Cell: ({ value }) => {
           // add state for managing expanded summaries
           const [isExpanded, setIsExpanded] = useState(false);
@@ -261,23 +273,26 @@ const DataTableComponent = ({ data }) => {
               {summaryText}
               {value.length > 100 && (
                 <button onClick={handleToggle} className="btn btn-link">
-                  {isExpanded ? 'Read less' : 'Read more'}
+                  {isExpanded ? "Read less" : "Read more"}
                 </button>
               )}
             </>
           );
         },
 
-        disableSortBy: true // Disable sorting for the summary column
+        disableSortBy: true, // Disable sorting for the summary column
       },
     ],
     []
   );
 
-  const filterTypes = useMemo(() => ({
-    dateBetween: dateBetweenFilterFn,
-    typeIn: typeInFilterFn,
-  }), []);
+  const filterTypes = useMemo(
+    () => ({
+      dateBetween: dateBetweenFilterFn,
+      typeIn: typeInFilterFn,
+    }),
+    []
+  );
 
   const {
     getTableProps,
@@ -309,10 +324,14 @@ const DataTableComponent = ({ data }) => {
   return (
     <div className="container mt-5">
       <div className="row mb-4">
-        <i>Note: Summaries and dates for certain articles are not available yet - we are working on it! </i> <br>
-        </br> <br></br><br></br> <b>
-          Use the filters below to search and filter the research database:
-        </b>
+        <i>
+          Note: Summaries and dates for certain articles are not available yet -
+          we are working on it! Certain summaries were created with the help of
+          OpenAI's API.{" "}
+        </i>{" "}
+        <br></br> <br></br>
+        <br></br>{" "}
+        <b>Use the filters below to search and filter the research database:</b>
       </div>
       <div className="row mb-4">
         <div className="col-md-2">
@@ -321,7 +340,7 @@ const DataTableComponent = ({ data }) => {
             id="date-from"
             type="date"
             className="form-control"
-            onChange={e => setStartDate(e.target.value)}
+            onChange={(e) => setStartDate(e.target.value)}
           />
         </div>
         <div className="col-md-2">
@@ -331,7 +350,7 @@ const DataTableComponent = ({ data }) => {
             type="date"
             className="form-control"
             placeholder="YYYY-MM-DD"
-            onChange={e => setEndDate(e.target.value)}
+            onChange={(e) => setEndDate(e.target.value)}
           />
         </div>
         <div className="col-md-2 mt-4">
@@ -342,12 +361,16 @@ const DataTableComponent = ({ data }) => {
       </div>
       <div className="row mb-4">
         <div className="col-md-4">
-          <label htmlFor="country-filter">Filter by Country of Publication:</label>
+          <label htmlFor="country-filter">
+            Filter by Country of Publication:
+          </label>
           <Select
             id="country-filter"
             isMulti
             options={uniqueCountries}
-            onChange={selectedOptions => handleMultiSelectChange('country_of_publication', selectedOptions)}
+            onChange={(selectedOptions) =>
+              handleMultiSelectChange("country_of_publication", selectedOptions)
+            }
           />
         </div>
         <div className="col-md-4">
@@ -356,7 +379,9 @@ const DataTableComponent = ({ data }) => {
             id="type-filter"
             isMulti
             options={uniqueTypes}
-            onChange={selectedOptions => handleMultiSelectChange('type_of_pub', selectedOptions)}
+            onChange={(selectedOptions) =>
+              handleMultiSelectChange("type_of_pub", selectedOptions)
+            }
           />
         </div>
         <div className="col-md-4">
@@ -365,21 +390,25 @@ const DataTableComponent = ({ data }) => {
             id="topic-filter"
             isMulti
             options={uniqueTopics}
-            onChange={selectedOptions => handleMultiSelectChange('topics', selectedOptions)}
+            onChange={(selectedOptions) =>
+              handleMultiSelectChange("topics", selectedOptions)
+            }
           />
         </div>
       </div>
       <div className="row mb-4">
         <div className="col-md-10 d-flex align-items-center">
-          <label htmlFor="page-selection" className="mr-2 mb-0">Publications Per Page: &nbsp; </label>
+          <label htmlFor="page-selection" className="mr-2 mb-0">
+            Publications Per Page: &nbsp;{" "}
+          </label>
           <select
             id="page-selection"
             className="form-control"
             value={pageSize}
-            onChange={e => setPageSize(Number(e.target.value))}
-            style={{ width: 'auto' }}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+            style={{ width: "auto" }}
           >
-            {[10, 20, 30, 40, 50].map(pageSize => (
+            {[10, 20, 30, 40, 50].map((pageSize) => (
               <option key={pageSize} value={pageSize}>
                 {pageSize}
               </option>
@@ -387,7 +416,10 @@ const DataTableComponent = ({ data }) => {
           </select>
         </div>
         <div className="col-md-2 d-flex justify-content-end">
-          <div className="d-flex align-items-center" style={{ whiteSpace: 'nowrap' }}>
+          <div
+            className="d-flex align-items-center"
+            style={{ whiteSpace: "nowrap" }}
+          >
             <input
               id="search-for"
               type="text"
@@ -397,30 +429,35 @@ const DataTableComponent = ({ data }) => {
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Search for content (e.g., topic, type, author)"
               className="form-control"
-              style={{ width: "auto", minWidth: '340px', marginRight: '5px' }} // Add this inline style
+              style={{ width: "auto", minWidth: "340px", marginRight: "5px" }} // Add this inline style
             />
             <button onClick={handleSearch} className="btn btn-primary">
               Apply Search
             </button>
           </div>
         </div>
-        <div><br></br>
+        <div>
+          <br></br>
           <b>Click on a header to sort the results!</b>
         </div>
       </div>
       <table {...getTableProps()} className="table table-hover table-striped">
         <thead className="thead-dark">
-          {headerGroups.map(headerGroup => (
+          {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
+              {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
+                  {column.render("Header")}
                   <span>
                     {column.isSorted
                       ? column.isSortedDesc
-                        ? column.id === 'date_of_pub' ? ' (Descending)' : ' (Z - A)'
-                        : column.id === 'date_of_pub' ? ' (Ascending)' : ' (A - Z)'
-                      : ''}
+                        ? column.id === "date_of_pub"
+                          ? " (Descending)"
+                          : " (Z - A)"
+                        : column.id === "date_of_pub"
+                        ? " (Ascending)"
+                        : " (A - Z)"
+                      : ""}
                   </span>
                 </th>
               ))}
@@ -428,12 +465,12 @@ const DataTableComponent = ({ data }) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map(row => {
+          {page.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                 ))}
               </tr>
             );
@@ -441,20 +478,39 @@ const DataTableComponent = ({ data }) => {
         </tbody>
       </table>
       <div className="row mb-4">
-        <div className="col-md-12 d-flex justify-content-end" style={{ fontSize: '0.875em' }}>
+        <div
+          className="col-md-12 d-flex justify-content-end"
+          style={{ fontSize: "0.875em" }}
+        >
           <div className="pagination">
-            <button className="btn btn-outline-dark mr-2" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-              {'<<'}
-            </button>{' '}
-            <button className="btn btn-outline-dark mr-2" onClick={() => previousPage()} disabled={!canPreviousPage}>
-              {'<'}
-            </button>{' '}
-            <button className="btn btn-outline-dark mr-2" onClick={() => nextPage()} disabled={!canNextPage}>
-              {'>'}
-            </button>{' '}
-            <button className="btn btn-outline-dark mr-2" onClick={() => gotoPage(pageOptions.length - 1)} disabled={!canNextPage}>
-              {'>>'}
-            </button>{' '}
+            <button
+              className="btn btn-outline-dark mr-2"
+              onClick={() => gotoPage(0)}
+              disabled={!canPreviousPage}
+            >
+              {"<<"}
+            </button>{" "}
+            <button
+              className="btn btn-outline-dark mr-2"
+              onClick={() => previousPage()}
+              disabled={!canPreviousPage}
+            >
+              {"<"}
+            </button>{" "}
+            <button
+              className="btn btn-outline-dark mr-2"
+              onClick={() => nextPage()}
+              disabled={!canNextPage}
+            >
+              {">"}
+            </button>{" "}
+            <button
+              className="btn btn-outline-dark mr-2"
+              onClick={() => gotoPage(pageOptions.length - 1)}
+              disabled={!canNextPage}
+            >
+              {">>"}
+            </button>{" "}
             <span className="align-middle ml-2">
               Page {pageIndex + 1} of {pageOptions.length}
             </span>
