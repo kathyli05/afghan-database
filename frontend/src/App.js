@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './Home';
-import Database from './Database';
-import Submit from './Submit';
+import Home from '../src/components/Home';
+import Database from '../src/components/Database';
+import Submit from '../src/components/Submit';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
