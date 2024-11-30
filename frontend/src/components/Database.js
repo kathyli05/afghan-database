@@ -7,7 +7,6 @@ import { FaEnvelope } from "react-icons/fa";
 
 const Database = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
 

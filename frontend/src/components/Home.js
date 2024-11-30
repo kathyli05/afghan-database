@@ -10,7 +10,7 @@ const Home = () => {
       <header className="header">
         <a href="/homepage" className="logo">
           Impact Afghanistan
-        </a>
+        </a> 
         <nav className="nav-items">
           <a href="/homepage">
             <b>Home</b>

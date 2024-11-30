@@ -42,7 +42,7 @@ const DataTableComponent = ({ data }) => {
           applyDateFilter();
         }
       }
-    };
+    }; 
 
     window.addEventListener("keydown", handleKeyDown);
 
