@@ -1,0 +1,53 @@
+.Database {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+   
+body {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+    font-family: "Source Sans 3", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 15px;
+    background: #eee;
+}
+
+.table {
+    width: 100%;
+    padding: 60px 30px;
+    margin-bottom: 15px;
+    flex-direction: column;
+}
+
+.header {
+    height: 60px;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #064322;
+}
+
+.header .logo {
+    font-size: 30px;
+    font-family: 'Source Sans 3';
+    font-weight: bold;
+    text-emphasis: 40;
+    color: #fff;
+    /* Change to white for better visibility */
+    text-decoration: none;
+}
